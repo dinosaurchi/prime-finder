@@ -8,6 +8,7 @@ with open('README.md', 'r') as fh:
 with open('requirements.txt', 'r') as f:
 	requirements = [line for line in f.readlines() if len(line) > 0 and not 'oandapy' in line]
 
+
 setuptools.setup(
 	name='prime_finder_client',
 	version=versioneer.get_version(),
@@ -17,7 +18,7 @@ setuptools.setup(
 	description='REST-API Serivce for prime finder',
 	long_description=long_description,
 	long_description_content_type='text/markdown',
-	url='https://github.com/dinosaurchi/stably-interview/services/prime_finder_client',
+	url='https://github.com/dinosaurchi/stably-interview',
 	packages=setuptools.find_packages(exclude=['docs', 'testcases']),
 	install_requires=requirements,
 	classifiers=[
