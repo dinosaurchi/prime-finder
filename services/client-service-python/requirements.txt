@@ -2,3 +2,6 @@ numpy==1.18.*
 versioneer==0.18
 Flask==1.1.*
 Flask_RESTful==0.3.*
+protobuf==3.13.*
+grpcio==1.32.*
+grpcio-tools==1.32.*
