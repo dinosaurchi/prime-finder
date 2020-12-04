@@ -1,0 +1,18 @@
+syntax = "proto3";
+package prime_finder_core.get_largest_prime;
+
+
+message InputRequest {
+	uint64 value = 1;
+}
+
+message UnsignedIntegerResponse {
+	bool status = 1;
+	string message = 2;
+	uint64 value = 3;	
+}
+
+service LargestPrimeFinder {
+	rpc GetLargestPrime(InputRequest) returns (UnsignedIntegerResponse);
+}
+
