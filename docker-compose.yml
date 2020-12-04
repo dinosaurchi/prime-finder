@@ -1,0 +1,46 @@
+version: '3.7'
+
+
+services:
+  core-service:
+    image: prime_finder_core:${BUILD_VERSION}
+    network_mode: "host"
+    build:
+      context: .
+      dockerfile: ${SERVICES_DIR}/core-service-python/Dockerfile
+      args:
+        - CORE_SERVICE_DIR
+        - PROTO_DIR
+    working_dir: /usr/src
+    shm_size: '2g'
+    entrypoint: python -m prime_finder_core.run
+    command:
+      --host 0.0.0.0
+      --port ${CORE_SERVICE_PORT}
+    volumes:
+      - ${SERVICES_DIR}/core-service-python/log:/usr/src/log
+    ports:
+      - ${CORE_SERVICE_PORT}:${CORE_SERVICE_PORT}
+
+  client-service:
+    image: prime_finder_client:${BUILD_VERSION}
+    network_mode: "host"
+    build:
+      context: .
+      dockerfile: ${SERVICES_DIR}/client-service-python/Dockerfile
+      args:
+        - CLIENT_SERVICE_DIR
+        - PROTO_DIR
+    working_dir: /usr/src
+    shm_size: '2g'
+    entrypoint: python -m prime_finder_client.run
+    command:  
+      --host 0.0.0.0
+      --port ${CLIENT_SERVICE_PORT}
+      --core_host 127.0.0.1:${CORE_SERVICE_PORT}
+    depends_on:
+      - "core-service"
+    volumes:
+      - ${SERVICES_DIR}/client-service-python/log:/usr/src/log
+    ports:
+      - ${CLIENT_SERVICE_PORT}:${CLIENT_SERVICE_PORT}
