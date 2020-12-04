@@ -2,5 +2,10 @@
 /result/
 /data/
 
+__pycache__/
+
+*.egg-info/
+
+*.pyc
 *.csv
 *.json
