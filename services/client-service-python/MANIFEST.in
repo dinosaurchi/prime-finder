@@ -1,0 +1,2 @@
+include versioneer.py
+include prime_finder_client/_version.py
