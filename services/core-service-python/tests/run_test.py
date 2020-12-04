@@ -30,12 +30,14 @@ while True:
 	if mess.lower().startswith('start running core-serivce on'):
 		break
 
+exit_code = 0
 try:
 	log_path = os.path.join(parent_dir, 'logs.txt')
 	with open(log_path, 'w+') as f:
 		test_res = unittest.TextTestRunner(stream=f, verbosity=2).run(alltests)
 		if not test_res.wasSuccessful():
 			status = 'FAILED'
+			exit_code = 1
 		else:
 			status = 'PASSED'
 
@@ -44,7 +46,9 @@ try:
 except Exception as e:
 	print(traceback.format_exc())
 	print(e)
+	exit_code = 1
 
 core_process.kill()
 threading.Event().wait(1)
 print('Core-process pid [{pid}] {status}'.format(pid=core_process.pid, status=core_process.poll()))
+exit(exit_code)
