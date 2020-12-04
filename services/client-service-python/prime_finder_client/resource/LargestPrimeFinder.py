@@ -10,7 +10,7 @@ import grpc
 
 
 class LargestPrimeFinder(Resource):
-	_UNIT_PATTERN = re.compile(r'[0-9]+')
+	_UNIT_PATTERN = re.compile(r'^[0-9]+$')
 	_MAX_UINT_STR = str(sys.maxsize)
 	'''
 	The resource for running the largest prime finder
