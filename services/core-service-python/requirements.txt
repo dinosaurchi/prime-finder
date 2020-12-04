@@ -1,0 +1,5 @@
+numpy==1.18.*
+versioneer==0.18
+protobuf==3.13.*
+grpcio==1.32.*
+grpcio-tools==1.32.*
