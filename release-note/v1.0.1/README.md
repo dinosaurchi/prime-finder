@@ -1,21 +1,25 @@
-# REST-API service for `Largest Primer Finder`
+# Overview
+
+This update consists of:
+
+- Tutorial on how to use the deployed service on `AWS` instance
+
+- Fixed some build bugs
+
+Because it is all about fixing and deploying, thus it deserves a version upgrade:
+
+- `v1.0.0` -> `v1.0.1`
 
 
-## AWS Host
+# AWS Host
 
-Currently the service is running on an `AWS` instance at
+Currently the service is running on an `AWS` instance at:
 ```
 http://54.179.177.247:5000/largest_prime
 ```
 
-## Client API
+## Usage
 
-From your web-browser, go to the following address
-```
-http://<running_host>:<running_port>/largest_prime?n=<input_number>
-```
-
-For instance:
 ```
 GET http://54.179.177.247:5000/largest_prime?n=3000
 

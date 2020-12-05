@@ -3,6 +3,35 @@
 This repo implements the solution for this problem as a micro-service
 
 
+**Highlight:**
+
+- [x] `GET` request `REST-API`
+
+- [x] Micro-service structure (`client-service` and `core-service`)
+
+- [x] Service's unittests
+
+- [x] Cross-language services's supported
+
+- [x] Git commit history
+
+- [x] Development/deployment documentation
+
+- [x] API documentation
+
+- [x] Code readability and maintainability
+
+- [x] Containerize service with `Docker`
+
+- [x] Host and run on AWS Free Tier instance
+
+**Upcoming:**
+
+- [ ] Improve `primality check` algorithm with `Sieve of Sundaram`
+
+- [ ] Use `Golang` (`1.11` or above with module support) to implement `core-service`
+
+
 ## Overview
 
 We have 2 containerized services:
@@ -41,7 +70,49 @@ Those `micro-services` are containerized using `Docker`
 
 ## User tutorial
 
-### Build
+
+### AWS Host
+
+Currently the service is running on an `AWS` instance at:
+```
+http://54.179.177.247:5000/largest_prime
+```
+
+### Client API
+
+From your web-browser, go to the following address
+```
+http://<running_host>:<running_port>/largest_prime?n=<input_number>
+```
+
+For instance:
+```
+GET http://54.179.177.247:5000/largest_prime?n=3000
+
+{"output" : 2999}
+
+
+GET http://54.179.177.247:5000/largest_prime?n=7
+
+{"output" : 5}
+
+
+GET http://54.179.177.247:5000/largest_prime?n=2
+
+{"error": "ERROR: ERROR: Cannot find any prime number less than 2"}
+
+
+GET http://54.179.177.247:5000/largest_prime?n=-1344
+
+{"error": "ERROR: Invalid unsigned integer pattern: -1344"}
+
+
+GET http://54.179.177.247:5000/largest_prime?n=99999999999999999999999999
+
+{"error": "ERROR: Input must be in range [0, 9223372036854775807): 99999999999999999999999999"}
+```
+
+### Build and run the service
 
 Clone expected version from this repo: [`stably-interview`](https://github.com/dinosaurchi/stably-interview)
 
@@ -67,45 +138,9 @@ CLIENT_SERVICE_PORT=5000
 CORE_SERVICE_PORT=5001
 ```
 
-### Run
-
 Run the following command to startup all related services:
 ```sh
 $ docker-compose up -d
-```
-
-### Client API
-
-From your web-browser, go to the following address
-```
-http://<running_host>:<running_port>/largest_prime?n=<input_number>
-```
-
-For instance:
-```
-GET http://127.0.0.1:5000/largest_prime?n=3000
-
-{"output" : 2999}
-
-
-GET http://127.0.0.1:5000/largest_prime?n=7
-
-{"output" : 5}
-
-
-GET http://127.0.0.1:5000/largest_prime?n=2
-
-{"error": "ERROR: ERROR: Cannot find any prime number less than 2"}
-
-
-GET http://127.0.0.1:5000/largest_prime?n=-1344
-
-{"error": "ERROR: Invalid unsigned integer pattern: -1344"}
-
-
-GET http://127.0.0.1:5000/largest_prime?n=99999999999999999999999999
-
-{"error": "ERROR: Input must be in range [0, 9223372036854775807): 99999999999999999999999999"}
 ```
 
 
@@ -167,7 +202,7 @@ find ./python -type d -exec touch {}/__init__.py \;
 For the very first version of the solution, we simply find the first prime number down from `N` to `2`
 
 To check the `primality` of a number:
-```
+```python
 def __is_prime(self, n:int):
 	if n <= 1:
 		return False
