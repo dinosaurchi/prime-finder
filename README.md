@@ -167,7 +167,7 @@ find ./python -type d -exec touch {}/__init__.py \;
 For the very first version of the solution, we simply find the first prime number down from `N` to `2`
 
 To check the `primality` of a number:
-```
+```python
 def __is_prime(self, n:int):
 	if n <= 1:
 		return False
