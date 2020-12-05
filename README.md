@@ -3,6 +3,35 @@
 This repo implements the solution for this problem as a micro-service
 
 
+**Highlight:**
+
+- [x] `GET` request `REST-API`
+
+- [x] Micro-service structure (`client-service` and `core-service`)
+
+- [x] Service's unittests
+
+- [x] Cross-language services's supported
+
+- [x] Git commit history
+
+- [x] Development/deployment documentation
+
+- [x] API documentation
+
+- [x] Code readability and maintainability
+
+- [x] Containerize service with `Docker`
+
+- [x] Host and run on AWS Free Tier instance
+
+**Upcoming:**
+
+- [ ] Improve `primality check` algorithm with `Sieve of Sundaram`
+
+- [ ] Use `Golang` (`1.11` or above with module support) to implement `core-service`
+
+
 ## Overview
 
 We have 2 containerized services:
