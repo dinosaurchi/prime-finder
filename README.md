@@ -114,7 +114,7 @@ GET http://54.179.177.247:5000/largest_prime?n=99999999999999999999999999
 
 ### Build and run the service
 
-Clone expected version from this repo: [`stably-interview`](https://github.com/dinosaurchi/stably-interview)
+Clone expected version from this repo: [`prime-finder`](https://github.com/dinosaurchi/prime-finder)
 
 Before building the service, we have to add the unix user to the `docker` group
 ```sh
