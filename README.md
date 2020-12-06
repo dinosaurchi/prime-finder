@@ -35,6 +35,10 @@ This repo implements the solution for this problem as a micro-service
 
 - [ ] Use `Golang` (`1.11` or above with module support) to implement `core-service`
 
+- [ ] Support running with a batch of `N`s for `core-service` to speed up
+
+- [ ] Implement `credentials` for `client-service`
+
 
 ## Overview
 
