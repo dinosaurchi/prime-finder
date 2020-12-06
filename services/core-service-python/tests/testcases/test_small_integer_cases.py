@@ -22,4 +22,4 @@ class Test(unittest.TestCase):
 			fail_mess = 'ERROR: Cannot find any prime number less than {v}'.format(v=i)
 			fail_mess = fail_mess.lower()
 			cur_mess = output.message.lower().strip('\r\t\n ')
-			self.assertEquals(cur_mess, fail_mess, 'Must have fail message: {v}'.format(v=i))
+			self.assertEqual(cur_mess, fail_mess, 'Must have fail message: {v}'.format(v=i))
