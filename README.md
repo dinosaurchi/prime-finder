@@ -116,6 +116,14 @@ GET http://54.179.177.247:5000/largest_prime?n=99999999999999999999999999
 
 Clone expected version from this repo: [`stably-interview`](https://github.com/dinosaurchi/stably-interview)
 
+Before building the service, we have to add the unix user to the `docker` group
+```sh
+$ sudo groupadd docker
+$ sudo usermod -a -G docker $USER
+```
+
+Then, reboot your instance
+
 Run the following command:
 ```sh
 $ ./build.sh
