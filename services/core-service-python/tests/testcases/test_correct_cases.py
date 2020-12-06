@@ -2,6 +2,7 @@ from prime_proto.prime_finder_core import get_largest_prime_pb2
 from prime_proto.prime_finder_core import get_largest_prime_pb2_grpc
 from prime_finder_core.global_vars import TEST_CORE_SERVICE_ADDRESS
 
+from tqdm import tqdm
 import unittest
 import grpc
 
@@ -27,7 +28,7 @@ class Test(unittest.TestCase):
 		values += [
 			5223444,
 		]
-		for i in values:
+		for i in tqdm(values):
 			cur_request = get_largest_prime_pb2.InputRequest(
 				value=i
 			)
