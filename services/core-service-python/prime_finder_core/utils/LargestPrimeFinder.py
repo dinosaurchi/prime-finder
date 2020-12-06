@@ -5,8 +5,10 @@ import numpy as np
 class LargestPrimeFinder:
 	def __init__(self):
 		self.__marked = None
+		self.__primes = None
 		# Init for the first 10 millions integers as the algorithm
-		self.__update_prime_db(n=1e7)
+		self.__MAX_INT = int(1e7)
+		self.__update_prime_db(n=self.__MAX_INT)
 
 	def __update_prime_db(self, n:int):
 		'''
@@ -18,6 +20,7 @@ class LargestPrimeFinder:
 
 		n = int((n - 1) / 2)
 		self.__marked = [False] * (n + 1)
+		self.__primes = [2]
 
 		for i in tqdm(range(1, n + 1), desc='Building marked database'):
 			j = i
@@ -27,6 +30,10 @@ class LargestPrimeFinder:
 					break
 				self.__marked[temp] = True
 				j += 1
+
+		for i in tqdm(range(1, n + 1), desc='Building primes database'):
+			if not self.__marked[i]:
+				self.__primes.append(i * 2 + 1)
 
 	def __check_prime(self, n:int):
 		if n <= 1:
