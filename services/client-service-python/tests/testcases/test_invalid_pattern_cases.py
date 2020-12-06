@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
 			fail_mess = 'ERROR: Invalid unsigned integer pattern: {v}'.format(v=i)
 			fail_mess = fail_mess.lower().strip('\r\t\n ')
 			cur_mess = res['error'].lower().strip('\r\t\n ')
-			self.assertEquals(cur_mess, fail_mess, 'Must have fail message: {v}'.format(v=i))
+			self.assertEqual(cur_mess, fail_mess, 'Must have fail message: {v}'.format(v=i))
 
 		# GET request does not preceive the `+` and ` ` (left and right), it replaces `+` with ` `
 		invalids = [
@@ -59,4 +59,4 @@ class Test(unittest.TestCase):
 			fail_mess = 'ERROR: Invalid unsigned integer pattern: {v}'.format(v=i.replace('+', ' ').strip('\n\r\t '))
 			fail_mess = fail_mess.lower().strip('\r\t\n ')
 			cur_mess = res['error'].lower().strip('\r\t\n ')
-			self.assertEquals(cur_mess, fail_mess, 'Must have fail message: {v}'.format(v=i))
+			self.assertEqual(cur_mess, fail_mess, 'Must have fail message: {v}'.format(v=i))

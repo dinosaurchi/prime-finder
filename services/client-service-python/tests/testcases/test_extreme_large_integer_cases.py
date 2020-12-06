@@ -29,4 +29,4 @@ class Test(unittest.TestCase):
 			fail_mess = 'ERROR: Input must be in range [0, {max_int}): {v}'.format(max_int=max_int, v=i)
 			fail_mess = fail_mess.lower()
 			cur_mess = res['error'].lower().strip('\r\t\n ')
-			self.assertEquals(cur_mess, fail_mess, 'Must have fail message: {v}'.format(v=i))
+			self.assertEqual(cur_mess, fail_mess, 'Must have fail message: {v}'.format(v=i))
