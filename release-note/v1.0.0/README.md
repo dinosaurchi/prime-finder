@@ -59,7 +59,7 @@ Those `micro-services` are containerized using `Docker`
 
 ### Build
 
-Clone expected version from this repo: [`stably-interview`](https://github.com/dinosaurchi/stably-interview)
+Clone expected version from this repo: [`prime-finder`](https://github.com/dinosaurchi/prime-finder)
 
 Run the following command:
 ```sh

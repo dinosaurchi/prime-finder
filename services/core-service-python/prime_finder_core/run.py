@@ -14,7 +14,10 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 	parser.add_argument("--host", help="Host IP", default='0.0.0.0')
 	parser.add_argument("--port", help="Listening port", default='5001')
+	parser.add_argument("--log", help="Logging the result output", action='store_true')
 	args = parser.parse_args()
+
+	logger = logging.getLogger()
 
 	address = '{host}:{port}'.format(host=args.host, port=args.port)
 
@@ -24,12 +27,11 @@ if __name__ == '__main__':
 	service = LargestPrimeFinderServicer()
 	get_largest_prime_pb2_grpc.add_LargestPrimeFinderServicer_to_server(service, server)
 
-	logger = logging.getLogger()
-
 	server.start()
 	wait_event = threading.Event()
 	try:
 		logger.warning('Start running core-serivce on {address}'.format(address=address))
+		logger.disabled = not args.log
 		while True:
 			'''
 			We must `flush` the `stdout` to avoid being locked:
