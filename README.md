@@ -27,7 +27,9 @@ This repo implements the solution for this problem as a micro-service
 
 - [x] Host and run on AWS Free Tier instance
 
-- [x] Implement `primality check` algorithm with `Sieve of Sundaram`
+- [x] Implement `core-service` algorithm with `Sieve of Sundaram`
+
+- [x] Speed up `core-service` algorithm with `binary search`
 
 **Upcoming:**
 
@@ -207,7 +209,10 @@ python -m grpc_tools.protoc -I ./protobuf --grpc_python_out ./python --python_ou
 find ./python -type d -exec touch {}/__init__.py \;
 ```
 
-### Algorithm description
+
+## Algorithm description
+
+### Prime database pre-built
 
 We use [Sieve of Sundaram](https://en.wikipedia.org/wiki/Sieve_of_Sundaram) algorithm to speed up the primality check for the number in range `[3, 1e7]`
 
@@ -267,6 +272,49 @@ def is_prime(n:int):
 It means, we only check the `odd` numbers, because `even` numbers are always not prime
 - Except `2`, thus we already checked if `n==2` beforehand
 
-The check runs in range `[3, sqrt(n))`
 
-We can improve the algorithm further with a latter [Sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin) algorithm
+### Prime searching
+
+For the searching, we use `binary-search`
+
+- The searching complexity will be reduced from `O(n)` to `O(log(n))`
+
+```python
+
+primes = [(2 * i + 1) for i in range(2, 1e7) if marked[i] is False]
+
+def binary_search(left:int, right:int, n:int):
+  if left <= right:
+    mid = int((left + right) / 2)
+
+    if mid == 0 or mid == len(primes) - 1:
+      return primes[mid]
+
+    if primes[mid] == n:
+      return primes[mid - 1]
+
+    if primes[mid] < n and primes[mid + 1] > n:
+      return primes[mid]
+
+    if n < primes[mid]:
+      return binary_search(left, mid - 1, n)
+
+    return binary_search(mid + 1, right, n)
+
+  raise Exception()
+```
+
+For `N > 1e7`, we use this `O(n)` algorithm:
+
+```python
+while n > 0:
+  n -= 1
+  if is_prime(n=n):
+    return n
+```
+
+
+### Future work
+
+We can improve the prime pre-built algorithm further with a latter [Sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin) algorithm
+
