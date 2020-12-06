@@ -50,5 +50,5 @@ class Test(unittest.TestCase):
 			self.assertTrue(is_prime(n=output.value), msg='Checking highest lower prime: {j} (n={n})'.format(j=output.value, n=i))
 
 			for j in range(output.value + 1, i):
-				self.assertFalse(is_prime(n=j), msg='Checking higher prime: {j} (n={n})'.format(j=j, n=i))
+				self.assertFalse(is_prime(n=j), msg='Checking higher prime: {j} > {i} (n={n})'.format(j=j, i=output.value, n=i))
 		print('Total algorithm runtime: {total_time}'.format(total_time=total_time))
