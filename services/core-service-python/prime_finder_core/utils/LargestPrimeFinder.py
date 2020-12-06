@@ -27,6 +27,21 @@ class LargestPrimeFinder:
 				self.__marked[temp] = True
 				j += 1
 
+	def __check_prime(self, n:int):
+		if n <= 1:
+			return False
+		if n == 2:
+			return True
+		if n > 2 and n % 2 == 0:
+			return False
+
+		max_n = int(np.floor(np.sqrt(n)))
+		# Check all the odd numbers
+		for i in range(3, 1 + max_n, 2):
+			if n % i == 0:
+				return False
+		return True
+
 	def __is_prime(self, n:int):
 		if n <= 1:
 			return False
@@ -36,6 +51,9 @@ class LargestPrimeFinder:
 			return False
 
 		check_index = int((n - 1) / 2)
+		if check_index >= len(self.__marked):
+			# If the input is out of Sieve_of_Sundaram pre-checked list, we simply check prime with the previous algorithm
+			return self.__check_prime(n=n)
 		# Part of Sieve_of_Sundaram algorithm
 		return not self.__marked[check_index]
 
