@@ -37,24 +37,59 @@ It defines the `GetLargestPrime()` `RPC` with the related `I/O` message structur
 
 ## Algorithm description
 
-For the very first version of the solution, we simply find the first prime number down from `N` to `2`
+We use [Sieve of Sundaram](https://en.wikipedia.org/wiki/Sieve_of_Sundaram) algorithm to speed up the primality check for the number in range `[3, 1e7]`
 
-To check the `primality` of a number:
+- According to this [informal article](https://medium.com/dev-genius/prime-numbers-and-the-sieve-of-eratosthenes-47f192568c8), this algorithm is efficient for `N <= 10 million`
+
 ```python
-def __is_prime(self, n:int):
-	if n <= 1:
-		return False
-	if n == 2:
-		return True
-	if n > 2 and n % 2 == 0:
-		return False
+def create_marked(n:int):
+  if n < 3:
+    return
 
-	max_n = int(np.floor(np.sqrt(n)))
-	# Check all the odd numbers
-	for i in range(3, 1 + max_n, 2):
-		if n % i == 0:
-			return False
-	return True
+  n = int((n - 1) / 2)
+  marked = [False] * (n + 1)
+
+  for i in range(1, n + 1):
+    j = i
+    while True:
+      temp = i + j + 2 * i * j
+      if temp  > n:
+        break
+      marked[temp] = True
+      j += 1
+  return marked
+
+marked = create_marked(1e7)
+
+def is_prime(n:int):
+  if n <= 1:
+    return False
+  if n == 2:
+    return True
+  if n > 2 and n % 2 == 0:
+    return False
+
+  check_index = int((n - 1) / 2)
+  # Part of Sieve_of_Sundaram algorithm
+  return not marked[check_index]
+```
+
+For `N > 1e7`, we use this algorithm
+```python
+def is_prime(n:int):
+  if n <= 1:
+    return False
+  if n == 2:
+    return True
+  if n > 2 and n % 2 == 0:
+    return False
+
+  max_n = int(np.floor(np.sqrt(n)))
+  # Check all the odd numbers
+  for i in range(3, 1 + max_n, 2):
+    if n % i == 0:
+      return False
+  return True
 ```
 
 It means, we only check the `odd` numbers, because `even` numbers are always not prime
@@ -62,6 +97,4 @@ It means, we only check the `odd` numbers, because `even` numbers are always not
 
 The check runs in range `[3, sqrt(n))`
 
-We can improve the algorithm further with checking-cache and also using `Sieve of Sundaram` algorithm
-
-- Ref: https://en.wikipedia.org/wiki/Sieve_of_Sundaram
+We can improve the algorithm further with a latter [Sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin) algorithm
