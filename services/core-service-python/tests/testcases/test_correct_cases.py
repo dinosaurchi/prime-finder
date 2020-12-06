@@ -25,7 +25,11 @@ class Test(unittest.TestCase):
 		channel = grpc.insecure_channel(TEST_CORE_SERVICE_ADDRESS)
 		stub = get_largest_prime_pb2_grpc.LargestPrimeFinderStub(channel)
 
-		values = list(range(3, 999))
+		# Repeated range checking, as we want to make sure that the algorithm output is deterministic, given an arbitrary input value
+		values = list(range(3, 9999))
+		values += list(range(3, 9999))
+		values += list(range(2000000, 220000, 1234))
+		values += list(range(2000000, 208000, 1234))
 		values += [
 			5223444,
 		]
