@@ -1,3 +1,4 @@
+from tqdm import tqdm
 import numpy as np
 
 
@@ -18,7 +19,7 @@ class LargestPrimeFinder:
 		n = int((n - 1) / 2)
 		self.__marked = [False] * (n + 1)
 
-		for i in range(1, n + 1):
+		for i in tqdm(range(1, n + 1), desc='Building marked database'):
 			j = i
 			while True:
 				temp = i + j + 2 * i * j
