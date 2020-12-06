@@ -65,10 +65,36 @@ class LargestPrimeFinder:
 		# Part of Sieve_of_Sundaram algorithm
 		return not self.__marked[check_index]
 
+	def __binary_search(self, left:int, right:int, n:int):
+		if left <= right:
+			mid = int((left + right) / 2)
+
+			if mid == 0 or mid == len(self.__primes) - 1:
+				return self.__primes[mid]
+
+			if self.__primes[mid] == n:
+				return self.__primes[mid - 1]
+
+			if self.__primes[mid] < n and self.__primes[mid + 1] > n:
+				return self.__primes[mid]
+
+			if n < self.__primes[mid]:
+				return self.__binary_search(left, mid - 1, n)
+
+			return self.__binary_search(mid + 1, right, n)
+
+		raise Exception('Invalid binary search: left ({left}) cannot be larger than right ({right}) (n={n})'.format(left=left, right=right, n=n))
+
 	def get_lower_largest_prime(self, n:int):
-		original_n = n
-		while n > 0:
-			n -= 1
-			if self.__is_prime(n=n):
-				return n
+		if 2 < n <= self.__MAX_INT:
+			res = self.__binary_search(0, len(self.__primes) - 1, n)
+			if res:
+				return res
+		else:
+			original_n = n
+			while n > 0:
+				n -= 1
+				if self.__is_prime(n=n):
+					return n
+
 		raise Exception('Cannot find any prime number less than {n}'.format(n=original_n))
