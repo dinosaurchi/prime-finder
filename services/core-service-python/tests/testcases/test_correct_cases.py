@@ -30,9 +30,14 @@ class Test(unittest.TestCase):
 		values += list(range(3, 9999))
 		values += list(range(2000000, 220000, 1234))
 		values += list(range(2000000, 208000, 1234))
+
+		# Large input value check
 		values += [
 			5223444,
+			9999999,
+			99999999,
 		]
+
 		total_time = 0
 		for i in tqdm(values):
 			cur_request = get_largest_prime_pb2.InputRequest(
