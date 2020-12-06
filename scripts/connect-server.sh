@@ -1,0 +1,1 @@
+ssh -i ~/.ssh/id_rsa_aws_free_1 ubuntu@54.179.177.247
