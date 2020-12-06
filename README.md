@@ -9,6 +9,8 @@ This repo implements the solution for this problem as a micro-service
 
 - [x] Micro-service structure (`client-service` and `core-service`)
 
+- [x] Micro-service `RPC` using `protobuf`
+
 - [x] Service's unittests
 
 - [x] Cross-language services's supported
