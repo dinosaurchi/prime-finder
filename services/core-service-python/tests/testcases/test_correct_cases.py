@@ -35,6 +35,7 @@ class Test(unittest.TestCase):
 		values += [
 			5223444,
 			9999999,
+			9999991,
 			99999999,
 		]
 
