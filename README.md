@@ -1,4 +1,4 @@
-# Find the largest prine which is less than `N`
+# Find the largest prime which is less than `N`
 
 This repo implements the solution for this problem as a micro-service
 
